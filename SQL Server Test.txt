@@ -1,0 +1,17 @@
+Connect to SQL Server Management Studio 2017
+And open the database "ArteDigitalTest"
+
+EXERCISE 1
+As the Manager of a Bank. I need to get the a report that shows me all
+the Account Transactions that were executed by the "Headquarters" Branch, 
+where the Ammount was greater than $100 but less than $1000.
+I want to see the Amount of each transaction and the full name of the Teller Employee.
+I would like to see first the transactions with larger ammounts.
+
+
+EXERCISE 2
+As the manager of a Bank, I want to know how many Employees do we have on each department
+of the "Headquarters" branch.
+I want to see the the Department Name and the total number of employees that has 
+the Teller title and the total number of the other employees for each department. 
+The Department Name needs to be ordered by the number of employees.

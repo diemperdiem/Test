@@ -1,0 +1,14 @@
+Solve the C# and SQL server problems included in this folder.
+The files are: Test Developer Jr and SQL Server Test.
+
+Make sure make sure to create a new folder on the desktop
+with your full name and include both exercises as follows:
+
+For the C# one, include the complete solution with all 
+the exercises, the name of the solution should be "YourFullName_CSharpTest".
+
+For the SQL Server one, save the .sql file in this folder with the
+name "YourFullName_SqlTest"
+
+Note: If you are doing this test remotely, make sure to run the script.sql in
+your sql instance, this file is included in the folder.
