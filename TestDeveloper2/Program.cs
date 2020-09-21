@@ -78,21 +78,16 @@ namespace TestDeveloper2
 
 
             var respuesta = HappyNumber(15);
-            string asd = "";
-
         }
 
         public static bool HappyNumber(int num)
         {
-            bool Resp = false;
-
             if (num < 1)
             {
-                return Resp = false;
+                return false;
             }
 
             double suma = 0;
-            double newNumber = 0;
             var NumberParse = num.ToString().ToArray();
 
             while (true)
@@ -115,28 +110,91 @@ namespace TestDeveloper2
                         suma += Math.Pow(NumaSumar, 2);
                     }
                 }
-                
 
                 if (suma == 1)
                 {
-                    return Resp = true;
+                    return true;
                 }
                 else if (suma == 4)
                 {
-                    return Resp = false;
+                    return false;
                 }
             }
-
-            return Resp;
         }
 
         //Implementation of classes
 
-        public static List<Employee> GetAverageSalaryPerHour(List<Employee> ListaEmpleados) 
+        public abstract class Employee
         {
+            protected string FullName { get { return $"{FirstNameMyProperty} {LastName}"; } }
+            protected abstract int HoursPerWeek { get; }
+            public string FirstNameMyProperty { get; set; }
+            public string MiddleName { get; set; } = null;
+            public string LastName { get; set; }
+            public int SalaryPerHour { get; set; }
+            public int TotalHours { get; set; }
 
-        
+            public int Salary() { return (int)Math.Round((double)SalaryPerHour * HoursPerWeek); }
+            public int ExtraSalary()
+            {
+                int ExtraHourPay = 0;
+                if (TotalHours >= HoursPerWeek)
+                {
+                    var ExtraHours = TotalHours - HoursPerWeek;
+
+                    if (HoursPerWeek == 48) //Local
+                    {
+                        var PercB = (100 * SalaryPerHour) / 30;
+                        var PercA = (100 * SalaryPerHour) / 60;
+
+                        if (ExtraHours > 12)
+                        {
+                            var HoursOver = ExtraHours - 12;
+                            ExtraHourPay = (int)Math.Round((double)(((12 * SalaryPerHour) + (PercB * 12)) + ((HoursOver * SalaryPerHour) + (PercA * HoursOver))));
+                        }
+                        else
+                        {
+                            ExtraHourPay = (int)Math.Round((double)((ExtraHours * SalaryPerHour) + (ExtraHours * PercB)));
+                        }
+
+                    }
+                    else if (HoursPerWeek == 40) //External
+                    {
+                        var PercB = (100 * SalaryPerHour) / 50;
+                        ExtraHourPay = (int)Math.Round((double)((ExtraHours * SalaryPerHour) + (ExtraHours * PercB)));
+                    }
+
+                    return ExtraHourPay;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            public int GetAverageSalaryPerHour(List<Employee> ListEmp)
+            {
+                List<int> SalaryList = new List<int>();
+
+                foreach (var item in ListEmp)
+                {
+                    SalaryList.Add(item.SalaryPerHour);
+                }
+
+                return SalaryList.Count > 0 ? (int)Math.Round((double)SalaryList.Average()) : 0;
+            }
         }
+
+        public class LocalEmployee : Employee
+        {
+            protected override int HoursPerWeek { get { return 48; } }
+
+        }
+
+        public class ExternalEmployee : Employee
+        {
+            protected override int HoursPerWeek { get { return 40; } }
+        }
+
 
     }
 }
